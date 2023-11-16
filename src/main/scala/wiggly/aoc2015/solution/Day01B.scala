@@ -3,9 +3,9 @@ package wiggly.aoc2015.solution
 import cats.effect.Sync
 import wiggly.aoc2015.domain.Day01._
 
-class Day01B[F[_] : Sync] {
+class Day01B[F[_]: Sync] {
   def solve(input: F[String]): F[Long] = {
-    val instructions = loadInstructions(input)
+    val instructions = parseInstructions(input)
 
     instructions
       .map({
@@ -20,8 +20,8 @@ class Day01B[F[_] : Sync] {
       .lastOrError
   }
 
-  def solveBasic(input: String): Long = {
-    val instructions = loadInstructionsBasic(input)
+  def solveSimple(input: String): Long = {
+    val instructions = parseInstructionsSimple(input)
 
     instructions
       .map({

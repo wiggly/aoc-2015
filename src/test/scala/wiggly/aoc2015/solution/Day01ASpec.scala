@@ -22,18 +22,20 @@ class Day01ASpec extends AnyFunSpec {
         assert(result == 280)
       }
     }
+  }
 
-    describe("when given small input basic") {
-      val input = inputLine[IO]("day01.small").unsafeRunSync()
-      val result = subjectBasic(input)
+  describe("Day 1A Simple") {
+    describe("when given small input") {
+      val input = inputLine[IO]("day01.small")
+      val result = subjectSimple(input)
       it("succeeds") {
         assert(result == -3)
       }
     }
 
-    describe("when given real input basic") {
-      val input = inputLine[IO]("day01").unsafeRunSync()
-      val result = subjectBasic(input)
+    describe("when given real input") {
+      val input = inputLine[IO]("day01")
+      val result = subjectSimple(input)
       it("succeeds") {
         assert(result == 280)
       }
@@ -44,7 +46,7 @@ class Day01ASpec extends AnyFunSpec {
     (new Day01A[IO]).solve(input).unsafeRunSync()
   }
 
-  private def subjectBasic(input: String): Int = {
-    (new Day01A[IO]).solveBasic(input)
+  private def subjectSimple(input: IO[String]): Int = {
+    (new Day01A[IO]).solveSimple(input.unsafeRunSync())
   }
 }

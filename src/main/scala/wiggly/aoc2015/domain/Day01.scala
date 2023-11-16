@@ -9,7 +9,7 @@ object Day01 {
   final case object Up extends Instruction
   final case object Down extends Instruction
 
-  def loadInstructions[F[_]](line: F[String])(implicit F: Sync[F]): Stream[F, Instruction] = {
+  def parseInstructions[F[_]](line: F[String])(implicit F: Sync[F]): Stream[F, Instruction] = {
     Stream
       .eval(line)
       .flatMap(line => Stream.fromIterator(line.iterator))
@@ -20,8 +20,9 @@ object Day01 {
       })
   }
 
-  def loadInstructionsBasic(line: String): List[Instruction] = {
-    List.from(line.iterator)
+  def parseInstructionsSimple(line: String): List[Instruction] = {
+    List
+      .from(line.iterator)
       .map[Instruction]({
         case '(' => Up
         case ')' => Down
